@@ -13,3 +13,5 @@ services:
       - PORT=3000
       - DATA_DIR=/app/data
       - NODE_ENV=production
+      # SvelteKit adapter-node request body limit (K/M/G suffixes supported). Default is 512K; set 0 for unlimited.
+      - BODY_SIZE_LIMIT=100M

@@ -24,6 +24,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV DATA_DIR=/app/data
+ENV BODY_SIZE_LIMIT=100M
 
 # Copy built bundle and minimal package configuration
 COPY --from=builder /app/package.json ./
