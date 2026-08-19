@@ -4,11 +4,13 @@
 	import Navbar from '$lib/components/Navbar.svelte';
 	import ReadingProgressBar from '$lib/components/ReadingProgressBar.svelte';
 	import FocusRuler from '$lib/components/FocusRuler.svelte';
+	import DocumentTabs from '$lib/components/DocumentTabs.svelte';
 	import MarkdownViewer from '$lib/components/MarkdownViewer.svelte';
 	import MarkdownEditor from '$lib/components/MarkdownEditor.svelte';
 	import Sidebar from '$lib/components/Sidebar.svelte';
 	import TableOfContents from '$lib/components/TableOfContents.svelte';
 	import FileUploader from '$lib/components/FileUploader.svelte';
+	import GlobalDropzone from '$lib/components/GlobalDropzone.svelte';
 	import SettingsModal from '$lib/components/SettingsModal.svelte';
 	import TtsPlayer from '$lib/components/TtsPlayer.svelte';
 	import { BookOpen, Upload, Plus } from 'lucide-svelte';
@@ -24,6 +26,7 @@
 
 <ReadingProgressBar />
 <Navbar />
+<DocumentTabs />
 <FocusRuler />
 
 <main class="main-viewport">
@@ -69,6 +72,7 @@
 <Sidebar />
 <TableOfContents />
 <FileUploader />
+<GlobalDropzone />
 <SettingsModal />
 <TtsPlayer />
 

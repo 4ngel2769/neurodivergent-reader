@@ -3,6 +3,7 @@ import type { DocumentDetail, DocumentMetadata } from '../types';
 class DocumentsStore {
 	items = $state<DocumentMetadata[]>([]);
 	activeDocument = $state<DocumentDetail | null>(null);
+	openTabIds = $state<string[]>([]);
 	isLoading = $state<boolean>(false);
 	searchQuery = $state<string>('');
 	isEditorMode = $state<boolean>(false);
@@ -18,6 +19,30 @@ class DocumentsStore {
 		}
 		const query = this.searchQuery.toLowerCase();
 		return this.items.filter((doc) => doc.title.toLowerCase().includes(query));
+	}
+
+	get openTabs(): DocumentMetadata[] {
+		return this.openTabIds
+			.map((id) => this.items.find((doc) => doc.id === id))
+			.filter((doc): doc is DocumentMetadata => Boolean(doc));
+	}
+
+	openTab(id: string) {
+		if (!this.openTabIds.includes(id)) {
+			this.openTabIds = [...this.openTabIds, id];
+		}
+	}
+
+	closeTab(id: string) {
+		this.openTabIds = this.openTabIds.filter((tabId) => tabId !== id);
+		if (this.activeDocument?.id === id) {
+			const nextId = this.openTabIds[this.openTabIds.length - 1];
+			if (nextId) {
+				this.selectDocument(nextId);
+			} else {
+				this.activeDocument = null;
+			}
+		}
 	}
 
 	async fetchAll() {
@@ -52,6 +77,7 @@ class DocumentsStore {
 			const data = await response.json();
 			if (data.success) {
 				this.activeDocument = data.document;
+				this.openTab(id);
 				if (typeof localStorage !== 'undefined') {
 					localStorage.setItem('neuroread_last_doc_id', id);
 				}
@@ -76,6 +102,7 @@ class DocumentsStore {
 			if (data.success) {
 				await this.fetchAll();
 				this.activeDocument = data.document;
+				this.openTab(data.document.id);
 				this.isEditorMode = true;
 			}
 		} catch (error) {
@@ -109,6 +136,7 @@ class DocumentsStore {
 			const data = await response.json();
 			if (data.success) {
 				this.items = this.items.filter((doc) => doc.id !== id);
+				this.openTabIds = this.openTabIds.filter((tabId) => tabId !== id);
 				if (this.activeDocument?.id === id) {
 					if (this.items.length > 0) {
 						await this.selectDocument(this.items[0].id);

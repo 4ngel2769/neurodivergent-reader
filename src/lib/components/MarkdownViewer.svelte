@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { marked } from 'marked';
 	import { docStore } from '$lib/stores/documents.svelte';
 	import { readerSettings } from '$lib/stores/settings.svelte';
 	import { applyBionicToHtml } from '$lib/utils/bionic';
+	import { saveScrollPosition, loadScrollPosition } from '$lib/utils/scrollPosition';
 
 	const rawMarkdown = $derived(docStore.activeDocument?.content || '');
 
@@ -13,6 +15,25 @@
 			return applyBionicToHtml(html, readerSettings.current.bionicFixation);
 		}
 		return html;
+	});
+
+	function handleScroll() {
+		if (docStore.activeDocument) {
+			saveScrollPosition(docStore.activeDocument.id, window.scrollY);
+		}
+	}
+
+	$effect(() => {
+		const docId = docStore.activeDocument?.id;
+		if (!docId) return;
+		requestAnimationFrame(() => {
+			window.scrollTo(0, loadScrollPosition(docId));
+		});
+	});
+
+	onMount(() => {
+		window.addEventListener('scroll', handleScroll, { passive: true });
+		return () => window.removeEventListener('scroll', handleScroll);
 	});
 </script>
 

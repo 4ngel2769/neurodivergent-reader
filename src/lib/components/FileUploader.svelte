@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { docStore } from '$lib/stores/documents.svelte';
+	import { uploadFile } from '$lib/utils/upload';
 	import { Upload, X, Check, AlertCircle, Loader2 } from 'lucide-svelte';
 
 	let isDragging = $state(false);
@@ -37,33 +38,23 @@
 		successMessage = '';
 		isUploading = true;
 
-		const formData = new FormData();
-		formData.append('file', file);
+		const result = await uploadFile(file);
 
-		try {
-			const response = await fetch('/api/documents/upload', {
-				method: 'POST',
-				body: formData
-			});
-
-			const data = await response.json();
-			if (!response.ok || !data.success) {
-				throw new Error(data.error || 'Failed to upload and convert file.');
-			}
-
-			successMessage = `Saved: ${data.document.title}`;
-			await docStore.fetchAll();
-			await docStore.selectDocument(data.document.id);
-
-			setTimeout(() => {
-				docStore.isUploaderOpen = false;
-				successMessage = '';
-				isUploading = false;
-			}, 700);
-		} catch (error) {
-			errorMessage = error instanceof Error ? error.message : 'Upload failed';
+		if (!result.success || !result.document) {
+			errorMessage = result.error || 'Upload failed';
 			isUploading = false;
+			return;
 		}
+
+		successMessage = `Saved: ${result.document.title}`;
+		await docStore.fetchAll();
+		await docStore.selectDocument(result.document.id);
+
+		setTimeout(() => {
+			docStore.isUploaderOpen = false;
+			successMessage = '';
+			isUploading = false;
+		}, 700);
 	}
 </script>
 
