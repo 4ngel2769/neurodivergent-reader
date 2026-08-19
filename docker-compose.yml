@@ -1,0 +1,15 @@
+services:
+  neurodivergent-reader:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: neurodivergent-reader
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - PORT=3000
+      - DATA_DIR=/app/data
+      - NODE_ENV=production

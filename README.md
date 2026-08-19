@@ -1,42 +1,86 @@
-# sv
+<div align="center">
+  <h1>NeuroRead</h1>
+  <p>
+    A sleek, minimal, and self-hostable <strong>Svelte 5 + Bun</strong> Markdown and PDF reader<br>
+    designed specifically for <strong>neurodivergent readers, ADHD, and dyslexia</strong>.
+  </p>
+</div>
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+---
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+**Documents**
+- PDF to clean Markdown conversion
+- Direct `.md` and `.txt` upload
+- In-browser Markdown editor
+- Persistent storage in `./data`
+- Download any document
 
-```sh
-# create a new project
-npx sv create my-app
+**Bionic Reading**
+- Bolds the first half of each word only
+- Does not change letter color
+- Preserves headings, links, tables and code
+
+**Typography**
+- Lexend, OpenDyslexic, Atkinson Hyperlegible, Comic Neue, Inter, JetBrains Mono
+- Adjustable font size, line spacing, letter spacing, word spacing and column width
+
+**Focus tools**
+- Reading line ruler
+- Spotlight mask
+- Active paragraph isolation
+- Reduced motion
+- Text-to-speech
+
+**Themes**
+- Pure black + white
+- Pure white + black
+- Soft dark and soft light
+- Custom monochrome colors
+
+All settings are saved locally. No tracking.
+
+---
+
+## Keyboard Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `B` | Toggle Bionic Reading |
+| `R` | Toggle Reading Ruler |
+| `S` | Open Settings |
+| `D` | Open Library |
+| `E` | Toggle Edit Mode |
+| `Esc` | Close modals |
+| `Alt` + `↑` / `↓` | Move Reading Ruler |
+
+---
+
+## Quickstart
+
+```bash
+git clone https://github.com/4ngel2769/neurodivergent-reader.git
+cd neurodivergent-reader
+docker compose up -d
 ```
 
-To recreate this project with the same configuration:
+Open http://localhost:3000  
+Files are stored in `./data`.
 
-```sh
-# recreate this project
-bun x sv@0.17.0 create --template minimal --types jsdoc --install bun .
+---
+
+## Local Development
+
+Requires [Bun](https://bun.sh/).
+
+```bash
+bun install
+bun run dev
 ```
 
-## Developing
+---
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## License
 
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+MIT
