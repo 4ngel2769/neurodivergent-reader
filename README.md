@@ -82,6 +82,13 @@ bun run dev
 
 <h1 align="center" style="color:#00ff00; font-family:monospace;"></h1>
 
+## Screenshos
+
+![Welcome to NeuroRead](assets/demo.jpeg)
+![Dark mode demo](assets/darkmode_demo.jpeg)
+![Focus settings panel](assets/demo_settings2.jpeg)
+![Typography settings panel](assets/demo_settings.jpeg)
+
 ## License
 
 MIT
