@@ -1,4 +1,5 @@
 <div align="center">
+  <img src="assets/demo.jpeg">
   <h1>NeuroRead</h1>
   <p>
     A sleek, minimal, and self-hostable <strong>Svelte 5 + Bun</strong> Markdown and PDF reader<br>
@@ -6,7 +7,7 @@
   </p>
 </div>
 
----
+<h1 align="center" style="color:#00ff00; font-family:monospace;"></h1>
 
 ## Features
 
@@ -41,7 +42,7 @@
 
 All settings are saved locally. No tracking.
 
----
+<h1 align="center" style="color:#00ff00; font-family:monospace;"></h1>
 
 ## Keyboard Shortcuts
 
@@ -55,7 +56,7 @@ All settings are saved locally. No tracking.
 | `Esc` | Close modals |
 | `Alt` + `↑` / `↓` | Move Reading Ruler |
 
----
+<h1 align="center" style="color:#00ff00; font-family:monospace;"></h1>
 
 ## Quickstart
 
@@ -68,7 +69,7 @@ docker compose up -d
 Open http://localhost:3000  
 Files are stored in `./data`.
 
----
+<h1 align="center" style="color:#00ff00; font-family:monospace;"></h1>
 
 ## Local Development
 
@@ -79,7 +80,7 @@ bun install
 bun run dev
 ```
 
----
+<h1 align="center" style="color:#00ff00; font-family:monospace;"></h1>
 
 ## License
 
